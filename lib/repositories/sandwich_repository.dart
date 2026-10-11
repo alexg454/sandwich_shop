@@ -1,0 +1,21 @@
+import 'package:sandwich_shop/models/sandwich.dart';
+class SandwichRepository {
+  List<Sandwich> getSandwiches() {
+    return const [
+      Sandwich(
+      id: 'footlong', 
+      name: 'Footlong Sub', 
+      description: 'A foot long sandwich', 
+      price: 8.99,
+      imagePath: 'assets/images/footlong.jpeg'
+      ),
+      Sandwich(
+        id: 'six-inch',
+        name: 'Six-inch Sub',
+        description: 'A six-inch long sandwich',
+        price: 5.99,
+        imagePath: 'assets/images/six_inch.jpeg'
+      )
+    ];
+  }
+}
