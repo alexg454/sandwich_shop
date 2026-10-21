@@ -46,13 +46,15 @@ class _OrderScreenState extends State<OrderScreen>{
               _quantity, 
               widget.sandwich.name
             ),
+            const SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _increaseQuantity,
                   child: const Text('Add'),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _decreaseQuantity,
                   child: const Text('Remove'),
