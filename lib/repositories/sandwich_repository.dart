@@ -1,4 +1,5 @@
 import 'package:sandwich_shop/models/sandwich.dart';
+
 class SandwichRepository {
   List<Sandwich> getSandwiches() {
     return const [
@@ -17,5 +18,14 @@ class SandwichRepository {
         imagePath: 'assets/images/six_inch.jpeg'
       )
     ];
+  }
+
+  Sandwich? getSandwichById(String id) {
+    for (final sandwich in getSandwiches()) {
+      if (sandwich.id == id) {
+        return sandwich;
+      }
+    }
+    return null;
   }
 }
