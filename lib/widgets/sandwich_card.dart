@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
 import 'package:sandwich_shop/screens/order_screen.dart';
 
-class SandwichCard extends StatelessWidget  {
+class SandwichCard extends StatelessWidget {
   final Sandwich sandwich;
 
   const SandwichCard({super.key, required this.sandwich});
@@ -41,10 +41,10 @@ class SandwichCard extends StatelessWidget  {
                       Text(
                         sandwich.description,
                         style: const TextStyle(color: Colors.black54),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -68,14 +68,14 @@ class SandwichCard extends StatelessWidget  {
                         },
                       ),
                     );
-                  }, 
+                  },
                   child: const Text('Order'),
                 ),
               ],
-            )
-          ]
+            ),
+          ],
         ),
-      ),  
+      ),
     );
   }
 }

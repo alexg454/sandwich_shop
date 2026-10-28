@@ -6,10 +6,10 @@ class Sandwich {
   final String imagePath;
 
   const Sandwich({
-    required this.id, 
-    required this.name, 
-    required this.description, 
-    required this.price, 
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
     required this.imagePath,
   });
 
