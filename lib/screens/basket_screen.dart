@@ -152,6 +152,7 @@ class _BasketScreenState extends State<BasketScreen> {
   Widget build(BuildContext context) {
     final CartRepository cart = CartRepository.instance;
     final List<CartItem> items = cart.getItems();
+
     final Widget content;
     if (items.isEmpty) {
       if (_confirmationMessage.isNotEmpty) {
@@ -169,7 +170,7 @@ class _BasketScreenState extends State<BasketScreen> {
         content = _buildEmptyState();
       }
     } else {
-      content = const Text('Basket list placeholder');
+      content = _buildBasketList(cart, items);
     }
 
     return Scaffold(
@@ -179,9 +180,7 @@ class _BasketScreenState extends State<BasketScreen> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
-        child: Center(
-          child: content,
-        ),
+        child: content,
       ),
     );
   }
