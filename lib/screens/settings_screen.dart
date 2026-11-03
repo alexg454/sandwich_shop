@@ -73,6 +73,65 @@ class _SettingScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 16),
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Full name',
+                hintText: 'Enter your name',
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _addressController,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Delivery address',
+                hintText: 'Enter delivery address',
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Email address',
+                hintText: 'Enter your email',
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                const Expanded(
+                  child: Text('Receive newsletter and offers'),
+                ),
+                Switch(
+                  value: _reveiceNewsletter, 
+                  onChanged: (bool value) {
+                    setState(() {
+                      _reveiceNewsletter = value;
+                    });
+                  }
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: PrimaryButton(
+                label: 'Save Settings',
+                onPressed: _saveSettings,
+              ),
+            ),
+            if (_confirmationMessage.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Text(
+                _confirmationMessage,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
           ],
         ),
       )
