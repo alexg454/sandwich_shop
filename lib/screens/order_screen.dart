@@ -1,5 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
+import 'package:sandwich_shop/constants.dart';
+import 'package:sandwich_shop/widgets/basket_button.dart';
+import 'package:sandwich_shop/models/cart_item.dart';
+import 'package:sandwich_shop/repositories/cart_repository.dart';
+import 'package:sandwich_shop/widgets/primary_button.dart';
 
 class OrderScreen extends StatefulWidget {
   final Sandwich sandwich;
@@ -15,6 +22,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
+  String _confirmationMessage = '';
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -28,31 +36,72 @@ class _OrderScreenState extends State<OrderScreen> {
     }
   }
 
+  void _addToBasket() {
+    if (_quantity > 0) {
+      final CartItem item = CartItem(
+        sandwich: widget.sandwich,
+        quantity: _quantity,
+      );
+      CartRepository.instance.addItem(item);
+      setState(() {
+        _confirmationMessage = 
+          'Added $_quantity ${widget.sandwich.name} to basket';
+      });
+    } else {
+      setState(() {
+        _confirmationMessage = 'Please select at least 1 sandwich';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Order ${widget.sandwich.name}')),
+      appBar: AppBar(
+        title: const Text(appTitle, style: shopHeaderStyle),
+        actions: const [BasketButton()],
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            OrderItemDisplay(_quantity, widget.sandwich.name),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: _increaseQuantity,
-                  child: const Text('Add'),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Order ${widget.sandwich.name}',
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              OrderItemDisplay(_quantity, widget.sandwich.name),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: _decreaseQuantity, 
+                    child: const Text('Remove'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: _increaseQuantity, 
+                    child: const Text('Add'),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryButton(
+                  label: 'Add to Basket', 
+                  onPressed: _addToBasket,
                 ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: _decreaseQuantity,
-                  child: const Text('Remove'),
-                ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                _confirmationMessage,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
         ),
       ),
     );
