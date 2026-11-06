@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
 import 'package:sandwich_shop/constants.dart';

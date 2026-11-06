@@ -1,5 +1,4 @@
 import 'package:sandwich_shop/models/cart_item.dart';
-import 'package:sandwich_shop/models/sandwich.dart';
 
 class CartRepository {
   CartRepository._internal();
