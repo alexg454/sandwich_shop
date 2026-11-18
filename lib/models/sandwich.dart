@@ -13,5 +13,22 @@ class Sandwich {
     required this.imagePath,
   });
 
+  factory Sandwich.fromJson(Map<String, dynamic> json) {
+    final String id = json['id'] as String;
+    final String name = json['name'] as String;
+    final String description = json['description'] as String;
+    final num priceNumber = json['price'] as num;
+    final double price = priceNumber.toDouble();
+    final String imagePath = json['imagePath'] as String;
+
+    return Sandwich(
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      imagePath: imagePath
+    );
+  }
+
   String get formattedPrice => '£${price.toStringAsFixed(2)}';
 }
