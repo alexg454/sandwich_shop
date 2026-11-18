@@ -6,6 +6,11 @@ class SandwichRepository {
   List<Sandwich>? _cachedSandwiches;
 
   List<Sandwich> getSandwiches() {
+    final List<Sandwich>? cachedSandwiches = _cachedSandwiches;
+    if (cachedSandwiches != null) {
+      return cachedSandwiches;
+    }
+    
     return const [
       Sandwich(
         id: 'footlong',
