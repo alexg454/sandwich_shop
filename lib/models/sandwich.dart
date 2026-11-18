@@ -30,5 +30,17 @@ class Sandwich {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'imagePath': imagePath
+    };
+
+    return data;
+  }
+
   String get formattedPrice => '£${price.toStringAsFixed(2)}';
 }
